@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tick Ultra 4k</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%2260%22%20height%3D%2260%22%20rx%3D%2216%22%20fill%3D%22%2305100a%22%20stroke%3D%22%232ee27a%22%20stroke-width%3D%223%22/%3E%3Cpolygon%20points%3D%2224%2C13%2024%2C39%2046%2C26%22%20fill%3D%22%232ee27a%22/%3E%3Ctext%20x%3D%2232%22%20y%3D%2255%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%20Black%2CArial%2Csans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2214%22%20fill%3D%22%232ee27a%22%3E4K%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/mp4box@0.5.2/dist/mp4box.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/build/mp4-muxer.js"></script>
+<style>
+:root{color-scheme:dark;--bg:#000;--surface:#0a0f0c;--line:#1a2a20;--text:#eaf5ee;--muted:#8aa597;--g:#2ee27a;--on-g:#03140a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Cairo',Tahoma,Arial,sans-serif;line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 40px}.toolbox,.page:not(#p-proc){max-width:640px;margin-left:auto;margin-right:auto}
+.bar0{display:flex;align-items:center;justify-content:space-between;padding:12px 0;direction:ltr}
+.logo{font-weight:900;font-size:18px;letter-spacing:1px}.logo b{color:var(--g)}
+.lic{font-size:12px;border:1px solid var(--line);border-radius:20px;padding:1px 10px;color:var(--muted)}.lic.on{color:var(--g);border-color:var(--g)}
+nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
+nav button{flex:0 0 auto;background:none;border:1px solid var(--line);color:var(--muted);font:inherit;font-size:14px;padding:5px 14px;border-radius:8px;cursor:pointer}
+nav button.on{background:#0f2a1b;color:var(--g);border-color:var(--g)}
+nav button:focus-visible,.btn:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+.page{display:none;padding-top:16px}.page.on{display:block}
+h1{font-size:22px;margin:0 0 12px;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.drop{display:block;border:2px dashed var(--g);border-radius:12px;padding:24px 12px;text-align:center;cursor:pointer}
+.drop.over{background:#0f2a1b}.drop b{display:block;font-size:18px}.drop small{color:var(--muted)}
+.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.drop:focus-within{outline:3px solid var(--g);outline-offset:2px}
+.fmts{display:flex;gap:6px;justify-content:center;margin-top:8px;direction:ltr}.fmts span{border:1px solid var(--line);border-radius:5px;padding:0 8px;font-size:12px}
+.info{display:none;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.info div,.stats div{background:#000;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--muted)}
+.info b,.stats b{display:block;direction:ltr;text-align:right;font-size:15px;color:var(--text)}
+.ctl{margin-top:12px}.ctl label{display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin-bottom:4px}
+.ctl em{font-style:normal;color:var(--g);font-size:12px}
+select,input[type=text]{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:#000;color:var(--text);font:inherit}
+input[type=range]{width:100%;direction:ltr;accent-color:var(--g)}
+.btn{display:block;width:100%;margin-top:12px;border:0;cursor:pointer;font:inherit;font-size:17px;font-weight:800;color:var(--on-g);background:var(--g);padding:11px;border-radius:10px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.sec{background:#000;border:1px solid var(--line);color:var(--text);font-size:15px;margin-top:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.prog{display:none}.track{height:12px;border-radius:6px;background:#000;border:1px solid var(--line);overflow:hidden;margin-top:6px}
+.track i{display:block;height:100%;width:0;background:var(--g)}
+.row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.msg{margin-top:8px;color:var(--muted);font-size:13px;min-height:20px}
+.done{display:none;text-align:center}
+.ok{width:64px;height:64px;border-radius:50%;background:var(--g);color:var(--on-g);display:grid;place-items:center;font-size:32px;font-weight:900;margin:6px auto}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0;text-align:right}
+.done video{width:100%;max-height:300px;border-radius:8px;background:#000}
+.tog{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.tog:first-of-type{border-top:0}.tog input{width:22px;height:22px;accent-color:var(--g)}
+.page h2{font-size:18px;margin:0 0 8px;color:var(--g)}
+.page p,.page li{color:var(--muted);font-size:15px;margin:4px 0}
+.page ol,.page ul{padding-right:20px;margin:6px 0}
+.toast{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));background:var(--g);color:var(--on-g);font-weight:800;padding:12px;border-radius:10px;text-align:center;display:none;z-index:9}
+.chg{cursor:pointer;color:var(--g);border:1px solid var(--g);border-radius:6px;padding:0 12px;font-size:13px}.dhikr{text-align:center;border:1px solid var(--line);border-radius:8px;padding:8px;margin-bottom:10px;font-size:12px;color:var(--muted)}.dhikr b{display:block;color:var(--text);font-size:15px}.stp{display:inline-block;background:var(--g);color:var(--on-g);font-weight:900;border-radius:20px;padding:0 16px;direction:ltr}.hs{border-right:4px solid var(--g)}.hs h3{margin:6px 0 2px;font-size:18px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;direction:ltr;margin-bottom:10px}.chips span{border:1px solid var(--g);color:var(--g);border-radius:6px;padding:0 10px;font-size:12px;font-weight:700}
+.hero{text-align:center;padding:48px 0 36px}
+.badge{display:inline-block;border:1px solid var(--g);color:var(--g);border-radius:20px;padding:2px 14px;font-size:13px;font-weight:700;direction:ltr}
+.hero h2{font-size:clamp(30px,6.5vw,52px);line-height:1.25;margin:16px auto 12px;max-width:720px;color:var(--text)}
+.hero h2 em{font-style:normal;color:var(--g)}
+.hero p{max-width:560px;margin:0 auto 22px;color:var(--muted);font-size:17px}
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cta a{padding:12px 28px;border-radius:10px;font-weight:800;text-decoration:none;font-size:16px}
+.cta .p{background:var(--g);color:var(--on-g)}.cta .s{border:1px solid var(--line);color:var(--text)}
+.cta a:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:34px 0 10px}
+.strip div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.strip b{display:block;font-size:22px;color:var(--g);direction:ltr}.strip span{font-size:13px;color:var(--muted)}
+.blk{padding:36px 0 6px}.blk>h2{font-size:26px;text-align:center;margin:0 0 6px}.blk>p.sub{text-align:center;color:var(--muted);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.fc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.fc i{font-style:normal;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:8px;background:#0f2a1b;color:var(--g);font-weight:900;margin-bottom:8px}
+.fc h3{margin:0 0 4px;font-size:17px}.fc p{margin:0;color:var(--muted);font-size:14px}
+.toolbox{scroll-margin-top:70px;padding-top:6px}.toolbox>h1{font-size:26px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;padding:2px 14px}
+summary{cursor:pointer;font-weight:700;padding:10px 0}details p{margin:0 0 10px;color:var(--muted);font-size:14px}
+.foot{border-top:1px solid var(--line);margin-top:40px;padding:22px 0;text-align:center;color:var(--muted);font-size:13px}
+.foot b{color:var(--text)}
+.bar0{padding:16px 0 10px}.logo{font-size:20px}
+nav{gap:2px;padding-bottom:0}
+nav button{border:0;border-bottom:2px solid transparent;border-radius:0;padding:10px 14px;background:none}
+nav button.on{background:none;border-bottom-color:var(--g);color:var(--text)}
+.hero{display:grid;grid-template-columns:1fr;gap:22px;text-align:right;padding:34px 0 10px}
+@media(min-width:820px){.hero{grid-template-columns:1.15fr .85fr;align-items:center;padding:56px 0 16px}}
+.hl h2{text-align:right;margin:14px 0 10px;max-width:none;font-size:clamp(30px,5.5vw,48px)}.hl p{margin:0 0 20px;max-width:none}.cta{justify-content:flex-start}
+.specp{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 16px}
+.specp div{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}.specp div:first-child{border-top:0}
+.specp span{color:var(--muted)}.specp b{direction:ltr;color:var(--g)}
+.gh{font-weight:900;font-size:13px;letter-spacing:.5px;color:var(--g);margin-bottom:2px}
+.card{border-radius:14px}.btn{transition:filter .15s}.btn:hover:not(:disabled){filter:brightness(1.1)}
+.top{padding:34px 0 8px;text-align:center}.top h1{font-size:clamp(34px,9vw,56px);margin:10px 0 8px;direction:ltr}.top h1 span{color:var(--g)}.top p{color:var(--muted);max-width:520px;margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:26px 0}
+.ft{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);direction:ltr;margin-top:2px}
+.lang{background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:2px 14px;font:inherit;cursor:pointer}
+.cp{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.cp span{border:1px solid var(--line);border-radius:6px;padding:0 10px;font-size:12px;color:var(--muted)}.cp .ok{border-color:var(--g);color:var(--g)}
+.cmp{position:relative;overflow:hidden;border-radius:10px;direction:ltr;display:none;background:#000;margin-top:10px}.cmp canvas{display:block;width:100%;height:auto}.cmp canvas+canvas{position:absolute;inset:0;width:100%;height:100%}.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}.cline{position:absolute;top:0;bottom:0;width:2px;background:var(--g);left:50%;pointer-events:none}.tg{position:absolute;top:8px;font-size:12px;background:rgba(0,0,0,.65);color:#fff;padding:0 8px;border-radius:6px;pointer-events:none}.tg.b{left:8px}.tg.a{right:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="bar0"><div class="logo" style="display:flex;align-items:center;gap:8px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="16" fill="#05100a" stroke="#2ee27a" stroke-width="3"/><polygon points="24,13 24,39 46,26" fill="#2ee27a"/><text x="32" y="55" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="14" fill="#2ee27a">4K</text></svg><span>TICK <b>ULTRA</b> 4K</span></div><button class="lang" id="langB" type="button">EN</button></div>
+<div class="top"><span class="badge">4K · 60 / 120 FPS</span><h1>Tick <span>Ultra</span> 4k</h1><p>معالجة الفيديو بدقة 4K وسرعات 60 و120 فريم، وبواجهة بثلاث خطوات فقط.</p></div>
+<div class="steps">
+<div class="card hs"><span class="stp">Step 1</span><h3>افتح البرنامج وسحب الفيديو</h3><p>اسحب ملف الفيديو وأفلته داخل الصفحة، أو اضغط لاختياره.</p></div>
+<div class="card hs"><span class="stp">Step 2</span><h3>انتظار معالجة المقطع</h3><p>تابع نسبة التقدم مباشرة أثناء المعالجة.</p></div>
+<div class="card hs"><span class="stp">Step 3</span><h3>الرفع المباشر</h3><p>بعد الانتهاء اضغط "رفع إلى تيك توك" أو احفظ الفيديو.</p></div>
+</div>
+<div class="card" style="max-width:640px;margin:0 auto 14px"><div class="gh">حالة النظام</div><div class="cp" id="caps"><span class="ok">المعالجة: على جهازك (بدون سحابة)</span></div></div>
+<section id="tool" style="max-width:640px;margin:0 auto">
+<div id="step1">
+<div class="card"><label class="drop" id="dz"><input type="file" id="file" multiple accept="video/*,.mp4,.mov,.m4v,.3gp,.mkv,.avi,.webm"><b id="dzT">أفلت الفيديو هنا</b><small>اسحب الملف وأفلته هنا، أو انقر للتصفح</small><div class="fmts"><span>MP4</span><span>MOV</span><span>MKV</span><span>AVI</span></div></label>
+<div class="info" id="info"></div><div id="qList"></div></div>
+<div class="card"><div class="gh">الترميز والجودة</div>
+<div class="ctl"><label>الترميز</label><select id="codec"><option value="h264">H.264</option><option value="h265" selected>H.265 (HEVC)</option></select></div>
+<div class="ctl"><label>الدقة والفريمات</label><select id="method"><option value="3840,120">4K 120 FPS</option><option value="3840,60" selected>4K 60 FPS</option><option value="3840,30">4K 30 FPS</option><option value="2560,120">1440p 120 FPS</option><option value="2560,60">1440p 60 FPS</option><option value="1920,120">1080p 120 FPS</option><option value="1920,60">1080p 60 FPS</option></select></div>
+<div class="ctl"><label>الجودة (CRF) <em id="crfL"></em></label><input type="range" id="crf" min="18" max="30" value="18"></div>
+<div class="ctl"><label>إزالة التشويش <em id="dnL"></em></label><input type="range" id="dn" min="0" max="3" value="2"><div class="ticks"><span>إيقاف</span><span>خفيف</span><span>متوسط</span><span>قوي</span></div></div>
+<div class="ctl"><label>قوة المعالجة</label><select id="lvl"><option value="0">عادي</option><option value="1" selected>قوي: تقليل تشويش زمني + تحسين تلقائي للإضاءة</option><option value="2">أقصى: أقوى تنظيف وشحذ</option></select></div>
+<input type="hidden" id="sh" value="1"><input type="hidden" id="tt" value="1"><input type="hidden" id="size" value="60">
+</div>
+<div class="card"><div class="gh">معاينة قبل وبعد</div><button class="btn sec" id="prevB" style="margin-top:0">معاينة على لقطة من فيديوك</button><div class="cmp" id="cmpP"><canvas></canvas><canvas></canvas><div class="cline"></div><span class="tg b">قبل</span><span class="tg a">بعد</span><input type="range" min="0" max="100" value="50" aria-label="before after"></div><div class="msg" id="prevM"></div></div>
+<div class="card prog" id="prog"><div class="dhikr">✦ اذكر الله وصلّ على النبي ✦<b>« أستغفر الله وأتوب إليه »</b></div><div class="row"><span id="pct">0%</span><span>LOADING</span></div><div class="track"><i id="fill"></i></div></div>
+<div class="msg" id="msg">اختر فيديو حتى تبدأ.</div>
+<button class="btn" id="go" disabled>ابدأ المعالجة</button>
+<button class="btn sec" id="stop" style="display:none;margin-top:10px">إيقاف</button>
+</div>
+<div class="card done" id="done">
+<div class="ok">✓</div><h1 style="margin:0;font-size:22px">تمّت المعالجة بنجاح!</h1><div class="msg" id="doneMsg">فيديوك جاهز للنشر الآن.</div>
+<div class="stats" id="stats"></div><div id="outList"></div>
+<div class="gh" style="text-align:start">قارن قبل وبعد</div><div class="cmp" id="cmpD"><canvas></canvas><canvas></canvas><div class="cline"></div><span class="tg b">قبل</span><span class="tg a">بعد</span><input type="range" min="0" max="100" value="50" aria-label="before after"></div>
+<video id="out" controls playsinline></video>
+<button class="btn" id="share">رفع إلى تيك توك</button>
+<div class="msg" style="margin-top:10px">فتح صفحة الرفع للمنصة (يُحفظ الفيديو أولاً)</div><div class="two" style="grid-template-columns:repeat(3,1fr);margin-top:0"><button class="btn sec" data-p="tt" style="font-size:13px;padding:8px 4px">TikTok</button><button class="btn sec" data-p="yt" style="font-size:13px;padding:8px 4px">YouTube Shorts</button><button class="btn sec" data-p="ig" style="font-size:13px;padding:8px 4px">Instagram</button></div>
+<div class="two"><button class="btn sec" id="save">حفظ الفيديو</button><button class="btn sec" id="again">معالجة فيديو آخر</button></div>
+<button class="btn sec" id="redo" style="display:none">إعادة المعالجة</button>
+</div>
+</section>
+<section style="margin-top:34px"><h2 style="text-align:center;font-size:22px;margin:0 0 14px">المميزات</h2>
+<div class="ft">
+<div class="fc"><i>1</i><h3>معالجة شاملة للجودة</h3><p>إزالة التشويش والشوائب أثناء المعالجة: تنظيف مكاني يحافظ على الحواف، وتقليل تشويش زمني بين الفريمات، وشحذ بدون هالات، وتحسين تلقائي للإضاءة. كلها خوارزميات وليست نماذج ذكاء اصطناعي.</p></div>
+<div class="fc"><i>2</i><h3>الدقات العالية</h3><p>رفع وتصدير بدقة 4K وبمعدل 60 حتى 120 فريم.</p></div>
+<div class="fc"><i>3</i><h3>واجهة بثلاث خطوات</h3><p>سحب الفيديو، انتظار المعالجة مع نسبة التقدم، ثم الرفع إلى تيك توك أو حفظ الفيديو.</p></div>
+<div class="fc"><i>4</i><h3>تحكم بالترميز والجودة</h3><p>اختيار الترميز وإعدادات CRF والدقة قبل بدء المعالجة.</p></div>
+<div class="fc"><i>5</i><h3>فحص السلامة</h3><p>بعد المعالجة يُقارن الموقع مدة الفيديو وعدد فريماته والدقة الناتجة بالمتوقع، ويخبرك إذا فيه نقص. هذا فحص للملف، وليس ضماناً لجودة النشر على تيك توك.</p></div>
+<div class="fc"><i>6</i><h3>توليد الفريمات (مزج)</h3><p>رفع الفريمات إلى 60 أو 120 بمزج الإطارات المتجاورة. هذا ليس ذكاءً اصطناعياً، وقد يظهر طيف خفيف بالحركة السريعة.</p></div>
+<div class="fc"><i>7</i><h3>معاينة قبل وبعد</h3><p>شريط سحب لمقارنة الفيديو الأصلي بالناتج.</p></div>
+<div class="fc"><i>8</i><h3>معالجة عدة فيديوهات</h3><p>حتى 10 فيديوهات بالدور مع إشعار عند الانتهاء. اترك الصفحة مفتوحة أثناء المعالجة.</p></div>
+<div class="fc"><i>9</i><h3>النشر للمنصات</h3><p>فتح صفحات الرفع لتيك توك ويوتيوب شورتس وإنستغرام بعد حفظ الفيديو. ليس نشراً مباشراً على حسابك.</p></div>
+<div class="fc"><i>10</i><h3>عربي / English</h3><p>تبديل فوري للغة الواجهة.</p></div>
+</div></section>
+<section style="max-width:640px;margin:34px auto 0"><h2 style="text-align:center;font-size:22px;margin:0 0 14px">حساب تيك توك</h2>
+<div class="card"><div class="ctl" style="margin-top:0"><label>اسم المستخدم</label><input type="text" id="acc" placeholder="@username" dir="ltr" autocomplete="off"></div>
+<div class="two"><button class="btn" id="accSave" style="margin-top:0">حفظ على جهازي</button><button class="btn sec" id="accDel">حذف</button></div>
+<button class="btn sec" id="accO" style="display:none;margin-top:10px">فتح حسابي على تيك توك</button>
+<div class="msg" id="accS"></div>
+<div class="msg">لا نطلب كلمة المرور أبداً. اسم المستخدم يُحفظ داخل متصفحك على جهازك فقط، ولا يُرسل لأي سيرفر.</div></div>
+<div class="card"><h2 style="font-size:18px;color:var(--g);margin:0 0 8px">الخصوصية</h2><ul style="color:var(--muted);font-size:15px;margin:0"><li>الفيديو يُعالج داخل جهازك ولا يُرفع لأي مكان.</li><li>لا يوجد تسجيل دخول ولا قاعدة بيانات للمستخدمين.</li><li>تقدر تحذف ما انحفظ بضغطة "حذف".</li></ul></div>
+<div class="card"><h2 style="font-size:18px;color:var(--g);margin:0 0 8px">تسجيل الدخول الحقيقي بتيك توك</h2><p style="color:var(--muted);font-size:15px;margin:0">الربط الفعلي بالحساب والنشر المباشر يتمان فقط عبر TikTok Login Kit، ويحتاجان تطبيقاً مطوّراً معتمداً من تيك توك وسيرفراً لإتمام تسجيل الدخول. هذا غير متاح داخل هذه الصفحة.</p></div></section>
+<footer class="foot"><b>Tick Ultra 4k</b> · المعالجة تتم داخل جهازك</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const CH=16*1048576;
+const fmt=s=>{s=Math.round(s);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+let file=null,outBlob=null,outName='tick-ultra-4k.mp4',busy=false,abort=false;
+const supported=!!(window.VideoDecoder&&window.VideoEncoder&&window.VideoFrame&&window.EncodedVideoChunk&&window.MP4Box&&window.Mp4Muxer);
+const shT=[0,.35,.7,1.1],dnT=[0,.1,.2,.35],dnN=['إيقاف','خفيف','متوسط','قوي'];
+function upd(){const c=+$('crf').value;$('crfL').textContent='CRF '+c+' • '+(c<=20?'جودة عالية':c<=25?'جودة جيدة':'متوسطة');$('dnL').textContent=dnN[$('dn').value]}
+$('crf').addEventListener('input',upd);$('dn').addEventListener('input',upd);upd();
+if(!supported)$('msg').textContent='متصفحك ما يدعم المعالجة الكاملة. افتح الرابط بـ Chrome حديث على أندرويد.';
+// file + info
+const dz=$('dz');
+['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over')}));
+['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over')}));
+dz.addEventListener('drop',e=>{const fs=[...((e.dataTransfer&&e.dataTransfer.files)||[])];if(fs.length)pick(fs[0],fs)});
+$('file').onchange=e=>{const fs=[...e.target.files];if(fs.length)pick(fs[0],fs)};
+let engineOK=false,queue=[];const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));const isMp4=f=>/\.(mp4|mov|m4v|3gp|3g2|qt)$/i.test(f.name);
+const cname=c=>/^avc/.test(c)?'H.264':/^(hvc|hev)/.test(c)?'HEVC':/^vp09/.test(c)?'VP9':/^av01/.test(c)?'AV1':c;
+async function probe(f){const mp=MP4Box.createFile();let inf=null;mp.onReady=i=>inf=i;let pos=0,it=0;while(!inf&&pos<f.size&&it++<800){const b=await f.slice(pos,pos+CH).arrayBuffer();b.fileStart=pos;mp.appendBuffer(b);pos+=b.byteLength}return inf}
+async function pick(f0,all){
+ let f=f0;$('go').disabled=true;$('msg').textContent='جاري قراءة الملف…';
+ try{if(f0.size<700*1048576)f=new File([await f0.arrayBuffer()],f0.name,{type:f0.type})}catch(e){$('msg').textContent='ما كدرت أقرأ الملف. اختره مرة ثانية من المعرض.';return}
+ file=f;engineOK=false;queue=(all&&all.length>1)?[f,...all.slice(1,10)]:[];rq();$('go').disabled=true;$('dzT').textContent=f.name.slice(0,28);$('msg').textContent='جاري قراءة معلومات الفيديو…';
+ let w='—',h='—',fps='—',dur=0,codec='—';
+ try{if(isMp4(f)&&window.MP4Box){const i=await probe(f);const t=i&&i.videoTracks[0];if(t){engineOK=true;dur=t.duration/t.timescale;w=t.video.width;h=t.video.height;fps=(t.nb_samples/dur).toFixed(2);codec=cname(t.codec)}}}catch(_){}
+ if(!dur){const u=URL.createObjectURL(f);const v=document.createElement('video');v.preload='metadata';v.muted=true;v.src=u;
+  await new Promise(r=>{v.onloadedmetadata=r;v.onerror=r});dur=v.duration||0;w=v.videoWidth||'—';h=v.videoHeight||'—';URL.revokeObjectURL(u)}
+ const i=$('info');i.style.display='grid';
+ i.innerHTML=`<div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:8px"><span><b style="font-size:14px">${esc(f.name.slice(0,26))}</b>${(f.size/1048576).toFixed(1)} MB</span><label for="file" class="chg">تغيير</label></div><div>الحجم<b>${(f.size/1048576).toFixed(1)} MB</b></div><div>الدقة<b>${w}×${h}</b></div><div>معدل الإطارات<b>${fps} FPS</b></div><div>المدة<b>${dur?fmt(dur):'—'}</b></div><div>الترميز<b>${codec}</b></div><div>الصيغة<b>${f.name.split('.').pop().toUpperCase()}</b></div>`;
+ if(dur>125){$('msg').textContent='الفيديو أطول من دقيقتين. قصّه لدقيقتين أو أقل.';return}
+ $('go').disabled=false;$('msg').textContent=engineOK?(supported?'جاهز. اضغط ابدأ المعالجة.':'متصفحك ما يدعم المعالجة الكاملة، راح تشتغل بالوضع المباشر.'):'هذي الصيغة تشتغل بالوضع المباشر (تسجيل أثناء التشغيل) وقد تفقد فريمات. الأفضل MP4 أو MOV.';
+}
+function getDesc(mp4,id){const t=mp4.getTrackById(id);for(const e of t.mdia.minf.stbl.stsd.entries){const b=e.avcC||e.hvcC||e.vpcC||e.av1C;if(b){const DS=window.DataStream||MP4Box.DataStream;const s=new DS(undefined,0,DS.BIG_ENDIAN);b.write(s);return new Uint8Array(s.buffer,8)}}}
+const VS='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+const FS=`precision highp float;uniform sampler2D a,b;uniform float w,rot,sh,dn,tn;uniform vec2 px,res;uniform vec4 adj;
+vec2 m(vec2 t){if(rot>2.5)return vec2(1.-t.y,t.x);if(rot>1.5)return vec2(1.-t.x,1.-t.y);if(rot>.5)return vec2(t.y,1.-t.x);return t;}
+vec3 s(vec2 q){vec3 x=texture2D(a,q).rgb;if(w>.001)return mix(x,texture2D(b,q).rgb,w);if(tn>0.){vec3 p=texture2D(b,q).rgb;vec3 dd=x-p;float k=exp(-dot(dd,dd)/.004);x=mix(x,p,tn*k);}return x;}
+void main(){vec2 t=vec2(gl_FragCoord.x/res.x,1.-gl_FragCoord.y/res.y);vec2 q=m(t);
+vec3 c=s(q);
+vec3 n1=s(q+vec2(px.x,0.)),n2=s(q-vec2(px.x,0.)),n3=s(q+vec2(0.,px.y)),n4=s(q-vec2(0.,px.y));
+vec3 n5=s(q+px),n6=s(q-px),n7=s(q+vec2(px.x,-px.y)),n8=s(q+vec2(-px.x,px.y));
+float sg=dn*.05+.00001;vec3 acc=c;float wt=1.;float k;
+k=exp(-dot(n1-c,n1-c)/sg);acc+=n1*k;wt+=k;
+k=exp(-dot(n2-c,n2-c)/sg);acc+=n2*k;wt+=k;
+k=exp(-dot(n3-c,n3-c)/sg);acc+=n3*k;wt+=k;
+k=exp(-dot(n4-c,n4-c)/sg);acc+=n4*k;wt+=k;
+k=exp(-dot(n5-c,n5-c)/sg);acc+=n5*k;wt+=k;
+k=exp(-dot(n6-c,n6-c)/sg);acc+=n6*k;wt+=k;
+k=exp(-dot(n7-c,n7-c)/sg);acc+=n7*k;wt+=k;
+k=exp(-dot(n8-c,n8-c)/sg);acc+=n8*k;wt+=k;
+vec3 d=acc/wt;vec3 avg=(n1+n2+n3+n4)*.25;
+vec3 mn=min(min(min(n1,n2),min(n3,n4)),c),mx=max(max(max(n1,n2),max(n3,n4)),c);
+vec3 o=clamp(d+(d-avg)*sh,mn-.02,mx+.02);
+o=pow(max(o,vec3(0.)),vec3(1./adj.w));
+o=(o-.5)*adj.y+.5+adj.x;
+float l=dot(o,vec3(.299,.587,.114));o=mix(vec3(l),o,adj.z);
+gl_FragColor=vec4(clamp(o,0.,1.),1.);}`;
+async function run(){
+ const T0=Date.now();abort=false;
+ const [long0,fpsT]=$('method').value.split(',').map(Number),cap=+$('size').value*1e6,crf=+$('crf').value,dn=dnT[$('dn').value],lv=+$('lvl').value,shp=[.35,.7,1][lv],tnv=[0,.25,.4][lv];
+ const mp4=MP4Box.createFile();let info=null;mp4.onReady=i=>info=i;
+ const vq=[],aq=[];let vT=null;
+ mp4.onSamples=(id,u,ss)=>{(id===vT.id?vq:aq).push(...ss)};
+ const CH=16*1048576;let pos=0,it=0;
+ const feed=async()=>{const b=await file.slice(pos,pos+CH).arrayBuffer();b.fileStart=pos;mp4.appendBuffer(b);pos+=b.byteLength};
+ while(!info&&pos<file.size&&it++<800)await feed();
+ if(!info||!info.videoTracks.length)throw new Error('الملف غير مدعوم. استخدم MP4 أو MOV');
+ vT=info.videoTracks[0];const aT=info.audioTracks[0],useA=!!aT&&aT.codec.startsWith('mp4a');
+ const srcW=vT.video.width,srcH=vT.video.height,m=vT.matrix;
+ let rot=0;if(m)rot=((Math.round(Math.atan2(m[1]/65536,m[0]/65536)*180/Math.PI)%360)+360)%360;
+ const rq=rot===90?1:rot===180?2:rot===270?3:0,sw=rq%2?srcH:srcW,sh2=rq%2?srcW:srcH;
+ const dur=vT.duration/vT.timescale,srcFps=Math.round(vT.nb_samples/dur);if(dur>125)throw new Error('الحد الأقصى دقيقتين');
+ let enc=null,W=0,H=0,FPS=0,usedCfg=null,lastOut=0;const LL=long0||Math.max(sw,sh2);const CL=($('codec').value==='h265'?['hvc1.1.6.L153.B0','hvc1.1.6.L150.B0','hvc1.1.6.L123.B0']:[]).concat(['avc1.640034','avc1.640033','avc1.640032','avc1.64002A']);let muxC='avc';
+ outer:for(const L of [LL,2560,1920,1280].filter((l,i,a)=>l<=LL&&a.indexOf(l)===i)){
+  const sc=L/Math.max(sw,sh2),w=Math.round(sw*sc/2)*2,h=Math.round(sh2*sc/2)*2;
+  for(const f of [fpsT||srcFps,60,30].filter((x,i,a)=>x<=(fpsT||srcFps)&&a.indexOf(x)===i)){
+   let br=Math.max(3e6,Math.round(cap*Math.pow(.9,crf-16)*(f>60?1.25:1)));if($('tt').value==='1')br=Math.min(br,Math.round(240*1048576*8*.93/dur));br=Math.max(br,3e6);
+   for(const c of CL){
+    for(const vr of [{bitrateMode:'variable',hardwareAcceleration:'prefer-hardware'},{}]){let r;try{r=await VideoEncoder.isConfigSupported({codec:c,width:w,height:h,bitrate:br,framerate:f,...vr})}catch(_){continue}
+    if(r.supported){usedCfg=r.config;W=w;H=h;FPS=f;muxC=c.startsWith('hvc')?'hevc':'avc';break outer}}}}}
+ if(!usedCfg)throw Object.assign(new Error('NOENC'),{noenc:1});
+ const dc={codec:vT.codec,codedWidth:srcW,codedHeight:srcH,description:getDesc(mp4,vT.id)};
+ if(!(await VideoDecoder.isConfigSupported(dc)).supported)throw Object.assign(new Error('NOENC'),{noenc:1});
+ const target=new Mp4Muxer.ArrayBufferTarget();
+ const mo={target,video:{codec:muxC,width:W,height:H,frameRate:FPS},fastStart:'in-memory',firstTimestampBehavior:'offset'};
+ if(useA)mo.audio={codec:'aac',numberOfChannels:aT.audio.channel_count,sampleRate:aT.audio.sample_rate};
+ const muxer=new Mp4Muxer.Muxer(mo);
+ let err=null;
+ enc=new VideoEncoder({output:(c,md)=>muxer.addVideoChunk(c,md),error:e=>err=e});enc.configure({...usedCfg,latencyMode:'quality'});
+ const cv=document.createElement('canvas');cv.width=W;cv.height=H;
+ const gl=cv.getContext('webgl',{alpha:false,preserveDrawingBuffer:true,antialias:false});
+ if(!gl)throw new Error('الهاتف ما يدعم WebGL');
+ const sd=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};
+ const pr=gl.createProgram();gl.attachShader(pr,sd(gl.VERTEX_SHADER,VS));gl.attachShader(pr,sd(gl.FRAGMENT_SHADER,FS));gl.linkProgram(pr);gl.useProgram(pr);
+ const bf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,bf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+ const lp=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(lp);gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);
+ const U=n=>gl.getUniformLocation(pr,n);gl.viewport(0,0,W,H);
+ gl.uniform1i(U('a'),0);gl.uniform1i(U('b'),1);gl.uniform1f(U('rot'),rq);gl.uniform1f(U('sh'),shp);gl.uniform1f(U('dn'),dn);gl.uniform2f(U('px'),1/srcW,1/srcH);gl.uniform2f(U('res'),W,H);gl.uniform1f(U('tn'),tnv);gl.uniform4f(U('adj'),0,1,1,1);
+ const autoTone=f=>{try{const c=document.createElement('canvas');c.width=96;c.height=Math.max(1,Math.round(96*f.displayHeight/f.displayWidth));const x=c.getContext('2d');x.drawImage(f,0,0,c.width,c.height);const d=x.getImageData(0,0,c.width,c.height).data;let s=0,s2=0;const n=d.length/4;for(let i=0;i<d.length;i+=4){const l=.299*d[i]+.587*d[i+1]+.114*d[i+2];s+=l;s2+=l*l}const mean=s/n,sd=Math.sqrt(Math.max(0,s2/n-mean*mean));gl.uniform4f(U('adj'),(mean<90?10:mean>170?-8:0)/100,1+Math.min(30,sd<50?(50-sd)/2:0)/100,1.06,1+Math.min(60,mean<110?(110-mean)/2:0)/100)}catch(_){}};
+ const uw=U('w');
+ const mk=()=>{const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);[[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]].forEach(([k,v])=>gl.texParameteri(gl.TEXTURE_2D,k,v));return t};
+ const tex=[mk(),mk()];let idx=0,prevTs=null,k=0,done=0,outN=0,t0=null,fed=0;
+ const emit=(ta,tb,w,ts,d)=>{gl.uniform1f(uw,w);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,ta);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,tb);gl.drawArrays(gl.TRIANGLES,0,3);
+  lastOut=ts+d;const vf=new VideoFrame(cv,{timestamp:Math.round(ts),duration:Math.round(d)});enc.encode(vf,{keyFrame:outN%(FPS*2)===0});vf.close();outN++};
+ const dOut=1e6/(fpsT||srcFps),sn=x=>x<.2?0:x>.8?1:x;
+ const onFrame=f=>{try{
+  const ts=f.timestamp;if(t0===null){t0=ts;if(lv>0)autoTone(f)}
+  idx^=1;gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,tex[idx]);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,f);
+  const cur=tex[idx],prev=tex[idx^1];
+  if(fpsT===0)emit(cur,prev,0,ts-t0,f.duration||dOut);
+  else if(prevTs===null){emit(cur,cur,0,0,dOut);k=1}
+  else{const d=ts-prevTs;for(;;){const tk=t0+k*dOut;if(tk>ts)break;emit(prev,cur,sn(d>0?Math.min(1,Math.max(0,(tk-prevTs)/d)):1),k*dOut,dOut);k++}}
+  prevTs=ts;done++;
+  if(done%5===0){const p=Math.min(99,done/vT.nb_samples*100);$('fill').style.width=p+'%';$('pct').textContent=Math.round(p)+'%';$('msg').textContent='جاري المعالجة… '+Math.round(p)+'% · '+Math.round(outN/((Date.now()-T0)/1000))+' فريم/ث — اذكر الله وصلّ على النبي'}
+ }catch(e){err=e}finally{f.close()}};
+ const dec=new VideoDecoder({output:onFrame,error:e=>err=e});dec.configure(dc);
+ const pump=async()=>{
+  while(vq.length){if(abort)throw new Error('تم الإيقاف');if(err)throw err;
+   while(dec.decodeQueueSize>8||enc.encodeQueueSize>8)await sleep(2);
+   const s=vq.shift();dec.decode(new EncodedVideoChunk({type:s.is_sync?'key':'delta',timestamp:Math.round(1e6*s.cts/s.timescale),duration:Math.round(1e6*s.duration/s.timescale),data:s.data}));fed++;
+   if(fed%40===0)mp4.releaseUsedSamples(vT.id,s.number+1);
+   if(fed%3===0)await sleep(0)}
+  if(useA)for(const s of aq.splice(0))muxer.addAudioChunkRaw(s.data,s.is_sync?'key':'delta',Math.round(1e6*s.cts/s.timescale),Math.round(1e6*s.duration/s.timescale),{decoderConfig:{codec:'mp4a.40.2',numberOfChannels:aT.audio.channel_count,sampleRate:aT.audio.sample_rate}});
+  else aq.length=0};
+ mp4.setExtractionOptions(vT.id,null,{nbSamples:200});if(useA)mp4.setExtractionOptions(aT.id,null,{nbSamples:500});
+ 
+ mp4.start();await pump();it=0;
+ while(fed<vT.nb_samples&&pos<file.size&&it++<20000){await feed();await pump()}
+ mp4.flush();await pump();
+ await dec.flush();await enc.flush();if(err)throw err;if(fed<vT.nb_samples*.99)throw new Error('انقرأ '+fed+' فريم فقط من '+vT.nb_samples);
+ muxer.finalize();
+ outBlob=new Blob([target.buffer],{type:'video/mp4'});
+ $('out').src=URL.createObjectURL(outBlob);
+ const exp=fpsT===0?vT.nb_samples:dur*FPS;return{exact:fpsT===0,inN:vT.nb_samples,outN,dIn:dur,dOut:lastOut/1e6,codec:muxC,W,H,FPS,warn:outN<exp*.97,down:FPS<(fpsT||srcFps)};
+}
+
+async function runFB(){
+ const [long0,fpsT]=$('method').value.split(',').map(Number),cap=+$('size').value*1e6,crf=+$('crf').value,dn=dnT[$('dn').value];
+ if(!window.MediaRecorder)throw new Error('المتصفح ما يدعم التسجيل');
+ const u=URL.createObjectURL(file),v=document.createElement('video');v.src=u;v.playsInline=true;v.preload='auto';
+ await new Promise((ok,no)=>{v.onloadedmetadata=ok;v.onerror=()=>no(new Error('المتصفح ما يكدر يقرأ هذي الصيغة. حوّل الفيديو إلى MP4'))});
+ if(v.duration>125)throw new Error('الحد الأقصى دقيقتان');
+ const sc=long0/Math.max(v.videoWidth,v.videoHeight),W=Math.round(v.videoWidth*sc/2)*2,H=Math.round(v.videoHeight*sc/2)*2,fps=fpsT||30;
+ const cv=document.createElement('canvas');cv.width=W;cv.height=H;const cx=cv.getContext('2d');cx.imageSmoothingQuality='high';
+ cx.filter=['none','blur(.3px) contrast(1.03)','blur(.5px) contrast(1.05)','blur(.8px) contrast(1.08)'][$('dn').value];
+ const st=cv.captureStream(fps);
+ try{const ac=new (window.AudioContext||window.webkitAudioContext)(),s=ac.createMediaElementSource(v),d=ac.createMediaStreamDestination();s.connect(d);d.stream.getAudioTracks().forEach(t=>st.addTrack(t))}catch(_){}
+ const mt=($('codec').value==='h265'?['video/mp4;codecs=hvc1']:[]).concat(['video/mp4;codecs=avc1','video/webm;codecs=vp9','video/webm']).find(t=>MediaRecorder.isTypeSupported(t));
+ const br=Math.round(Math.min(cap,Math.max(3e6,W*H*Math.min(fps,60)*.06*Math.pow(.9,crf-18))));
+ const rec=new MediaRecorder(st,{mimeType:mt,videoBitsPerSecond:br}),ch=[];rec.ondataavailable=e=>e.data.size&&ch.push(e.data);
+ const fin=new Promise(r=>rec.onstop=r);let ended=false;
+ const draw=()=>{if(ended)return;if(abort){ended=true;rec.stop();return}cx.drawImage(v,0,0,W,H);const p=v.currentTime/v.duration*100;$('fill').style.width=p+'%';$('pct').textContent=Math.round(p)+'%';v.requestVideoFrameCallback?v.requestVideoFrameCallback(draw):requestAnimationFrame(draw)};
+ v.onended=()=>{ended=true;setTimeout(()=>rec.state!=='inactive'&&rec.stop(),300)};
+ rec.start(1000);await v.play();draw();await fin;URL.revokeObjectURL(u);
+ if(abort)throw new Error('تم الإيقاف');
+ outBlob=new Blob(ch,{type:mt.split(';')[0]});outName='tick-ultra-4k.'+(mt.startsWith('video/mp4')?'mp4':'webm');
+ return{W,H,FPS:fps,fb:true};
+}
+async function start(){
+ if(busy||!file)return;busy=true;abort=false;
+ $('go').style.display='none';$('stop').style.display='block';$('prog').style.display='block';$('fill').style.width='0';$('pct').textContent='0%';
+ const T0=Date.now();let wl=null;try{wl=await navigator.wakeLock.request('screen')}catch(_){}
+ try{if(true&&window.Notification&&Notification.permission==='default')Notification.requestPermission()}catch(_){}
+ try{
+  let r;const outs=[],st=[];for(let qi=0;qi<Math.max(1,queue.length);qi++){if(queue.length>1){st[qi]='⚙️';rq(st);file=await mat(queue[qi]);engineOK=await chk(file);$('msg').textContent='ملف '+(qi+1)+' من '+queue.length}
+  if(engineOK&&supported){try{r=await run()}catch(e){if(e&&e.noenc){$('msg').textContent='الهاتف ما يدعم الترميز السريع، جاري الوضع المباشر…';r=await runFB()}else throw e}}else r=await runFB();
+  outs.push({name:file.name,blob:outBlob,n:queue.length>1?'tick-ultra-4k-'+(qi+1)+'.mp4':outName});st[qi]='✓';rq(st)}
+  outsG=outs;
+  const secs=(Date.now()-T0)/1000;
+  $('out').src=URL.createObjectURL(outBlob);
+  $('stats').innerHTML=`<div>وقت المعالجة<b>${fmt(secs)}</b></div><div>الدقة<b>${r.W}×${r.H}</b></div><div>الفريمات والترميز<b>${r.FPS} FPS${r.codec?' · '+(r.codec==='hevc'?'H.265':'H.264'):''}</b></div>${r.inN!=null?'<div>الفريمات (ناتج / متوقع)<b>'+r.outN+' / '+(r.exact?r.inN:Math.round(r.dIn*r.FPS))+'</b></div><div>المدة (ناتج / أصل)<b>'+r.dOut.toFixed(2)+'s / '+r.dIn.toFixed(2)+'s</b></div>':''}<div>الحجم<b>${(outBlob.size/1048576).toFixed(1)} MB</b></div>`;
+  $('doneMsg').textContent=(r.inN!=null&&!r.warn&&Math.abs(r.dOut-r.dIn)<.25?'✓ فحص السلامة: المدة والفريمات مطابقة. ':'')+(r.warn?'⚠ الفريمات أقل من المتوقع. ':'')+($('codec').value==='h265'&&r.codec==='avc'?'الهاتف ما يدعم H.265 فاستخدمت H.264. ':'')+(Math.max(r.W,r.H)<+$('method').value.split(',')[0]?'نزلت الدقة إلى '+r.W+'×'+r.H+' لأن الهاتف ما يدعم الأعلى. ':'')+(r.down?'نزلت الفريمات لأن الهاتف ما يدعم الأعلى. ':'')+(r.fb?'تمت بالوضع المباشر. ':'')+'فيديوك جاهز للنشر الآن.';
+  $('outList').innerHTML=outs.length>1?outs.map((o,i)=>'<div class="tog"><span>'+esc(o.name.slice(0,22))+' · '+(o.blob.size/1048576).toFixed(1)+'MB</span><button class="btn sec" style="width:auto;margin:0;padding:6px 14px" data-i="'+i+'">حفظ</button></div>').join(''):'';
+  $('step1').style.display='none';$('done').style.display='block';
+  notify();
+  try{const ou=URL.createObjectURL(file),pu=URL.createObjectURL(outBlob);const cb=await frameAt(ou,.5,960),ca=await frameAt(pu,.5,960);putCmp($('cmpD'),cb,ca);URL.revokeObjectURL(ou);URL.revokeObjectURL(pu)}catch(_){}
+ }catch(e){$('msg').textContent='توقفت المعالجة: '+(e&&e.message||e)+'. جرّب 2K أو 1080p أو فيديو MP4.'}
+ try{wl&&wl.release()}catch(_){}
+ busy=false;$('go').style.display='block';$('stop').style.display='none';$('prog').style.display='none';
+}
+function notify(){
+ const t=$('toast');t.textContent='✓ تمّت المعالجة بنجاح! فيديوك جاهز للنشر.';t.style.display='block';setTimeout(()=>t.style.display='none',5000);
+ try{navigator.vibrate&&navigator.vibrate(200)}catch(_){}
+ try{if(true&&window.Notification&&Notification.permission==='granted')new Notification('Tick Ultra 4k',{body:'تمّت المعالجة بنجاح! فيديوك جاهز للنشر.'})}catch(_){}
+}
+$('go').onclick=start;$('stop').onclick=()=>{abort=true};
+$('save').onclick=async()=>{
+ try{const d=window.claude&&await claude.use('downloads');
+  if(!d){alertT('الحفظ المباشر غير متاح هنا. افتح الصفحة بالمتصفح.');return}
+  await d.save({filename:outName,data:outBlob});$('doneMsg').textContent='تم الحفظ. تلقاه بمجلد التنزيلات.'}catch(e){if(e&&e.code!=='declined')alertT('تعذّر الحفظ.')}};
+$('share').onclick=async()=>{
+ const f=new File([outBlob],outName,{type:outBlob.type||'video/mp4'});
+ try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Tick Ultra 4k'});return}}catch(e){if(e&&e.name==='AbortError')return}
+ try{const d=window.claude&&await claude.use('downloads');if(d){await d.save({filename:outName,data:outBlob});$('doneMsg').textContent='المشاركة المباشرة غير متاحة هنا، فتم حفظ الفيديو. افتح تيك توك وارفعه من المعرض.';return}}catch(e){}
+ alertT('المشاركة المباشرة غير متاحة بهذا المتصفح. افتح الصفحة بـ Chrome ثم جرّب.')};
+$('redo').onclick=()=>{$('done').style.display='none';$('step1').style.display='block';$('msg').textContent='عدّل الإعدادات وابدأ من جديد.'};
+$('again').onclick=()=>{$('done').style.display='none';$('step1').style.display='block';$('go').disabled=true;$('info').style.display='none';$('file').value='';$('dzT').textContent='أفلت الفيديو هنا';$('msg').textContent='اختر فيديو حتى تبدأ.';file=null};
+
+const LSg=k=>{try{return localStorage.getItem(k)}catch(_){return null}},LSs=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}},LSd=k=>{try{localStorage.removeItem(k)}catch(_){}};
+const ttU=()=>($('acc').value||'').trim().replace(/^@/,'').replace(/[^\w.]/g,'');
+function accUI(){const u=ttU();$('accO').style.display=u?'block':'none';$('accS').textContent=u?('محفوظ على هذا الجهاز: @'+u):'لا يوجد حساب محفوظ.'}
+$('acc').value=LSg('tuk_tt')||'';accUI();
+$('accSave').onclick=()=>{const u=ttU();if(!u){$('accS').textContent='اكتب اسم المستخدم أولاً.';return}LSs('tuk_tt',u);$('acc').value='@'+u;accUI()};
+$('accO').onclick=()=>{const u=ttU();if(u)window.open('https://www.tiktok.com/@'+u,'_blank','noopener')};
+$('accDel').onclick=()=>{LSd('tuk_tt');$('acc').value='';accUI()};
+const EN={"معالجة الفيديو بدقة 4K وسرعات 60 و120 فريم، وبواجهة بثلاث خطوات فقط.": "Video processing at 4K and 60/120 FPS, in just three steps.", "افتح البرنامج وسحب الفيديو": "Open the app and drop your video", "اسحب ملف الفيديو وأفلته داخل الصفحة، أو اضغط لاختياره.": "Drag and drop a video file onto the page, or tap to choose one.", "انتظار معالجة المقطع": "Wait for processing", "تابع نسبة التقدم مباشرة أثناء المعالجة.": "Follow the live progress while it processes.", "الرفع المباشر": "Direct upload", "بعد الانتهاء اضغط \"رفع إلى تيك توك\" أو احفظ الفيديو.": "When done, tap \"Upload to TikTok\" or save the video.", "أفلت الفيديو هنا": "Drop your video here", "اسحب الملف وأفلته هنا، أو انقر للتصفح": "Drag and drop the file here, or click to browse", "الترميز والجودة": "Codec & quality", "الترميز": "Codec", "الدقة والفريمات": "Resolution & FPS", "الجودة (CRF)": "Quality (CRF)", "إزالة التشويش": "Denoise", "إيقاف": "Off", "خفيف": "Light", "متوسط": "Medium", "قوي": "Strong", "قوة المعالجة": "Processing strength", "عادي": "Normal", "قوي: تقليل تشويش زمني + تحسين تلقائي للإضاءة": "Strong: temporal denoise + auto exposure", "أقصى: أقوى تنظيف وشحذ": "Max: strongest cleaning & sharpening", "✦ اذكر الله وصلّ على النبي ✦": "✦ Remember God ✦", "« أستغفر الله وأتوب إليه »": "« I seek God's forgiveness »", "اختر فيديو حتى تبدأ.": "Choose a video to start.", "ابدأ المعالجة": "Start processing", "تمّت المعالجة بنجاح!": "Processing complete!", "فيديوك جاهز للنشر الآن.": "Your video is ready to post.", "رفع إلى تيك توك": "Upload to TikTok", "حفظ الفيديو": "Save video", "معالجة فيديو آخر": "Process another video", "إعادة المعالجة": "Reprocess", "المميزات": "Features", "معالجة شاملة للجودة": "Comprehensive quality processing", "إزالة التشويش والشوائب أثناء المعالجة: تنظيف مكاني يحافظ على الحواف، وتقليل تشويش زمني بين الفريمات، وشحذ بدون هالات، وتحسين تلقائي للإضاءة. كلها خوارزميات وليست نماذج ذكاء اصطناعي.": "Noise and artifact removal while processing: edge-preserving spatial cleaning, temporal noise reduction between frames, halo-free sharpening, and automatic exposure tuning. All are algorithms, not AI models.", "الدقات العالية": "High resolutions", "رفع وتصدير بدقة 4K وبمعدل 60 حتى 120 فريم.": "Upscale and export at 4K and 60 up to 120 FPS.", "واجهة بثلاث خطوات": "Three-step interface", "سحب الفيديو، انتظار المعالجة مع نسبة التقدم، ثم الرفع إلى تيك توك أو حفظ الفيديو.": "Drop the video, wait with a live progress bar, then upload to TikTok or save it.", "تحكم بالترميز والجودة": "Codec & quality control", "اختيار الترميز وإعدادات CRF والدقة قبل بدء المعالجة.": "Choose the codec, CRF and resolution before processing.", "فحص السلامة": "Integrity check", "بعد المعالجة يُقارن الموقع مدة الفيديو وعدد فريماته والدقة الناتجة بالمتوقع، ويخبرك إذا فيه نقص. هذا فحص للملف، وليس ضماناً لجودة النشر على تيك توك.": "After processing, the site compares the duration, frame count and output resolution with what is expected and warns you of any shortfall. This checks your file; it does not guarantee quality on TikTok.", "توليد الفريمات (مزج)": "Frame generation (blending)", "رفع الفريمات إلى 60 أو 120 بمزج الإطارات المتجاورة. هذا ليس ذكاءً اصطناعياً، وقد يظهر طيف خفيف بالحركة السريعة.": "Raises frame rate to 60 or 120 by blending neighboring frames. This is not AI and slight ghosting can appear in fast motion.", "معاينة قبل وبعد": "Before / After preview", "شريط سحب لمقارنة الفيديو الأصلي بالناتج.": "A slider to compare the original with the output.", "معالجة عدة فيديوهات": "Batch processing", "حتى 10 فيديوهات بالدور مع إشعار عند الانتهاء. اترك الصفحة مفتوحة أثناء المعالجة.": "Up to 10 videos in a queue with a notification when finished. Keep the page open while processing.", "النشر للمنصات": "Publishing to platforms", "فتح صفحات الرفع لتيك توك ويوتيوب شورتس وإنستغرام بعد حفظ الفيديو. ليس نشراً مباشراً على حسابك.": "Opens the upload pages for TikTok, YouTube Shorts and Instagram after saving the video. It does not post to your account directly.", "عربي / English": "Arabic / English", "تبديل فوري للغة الواجهة.": "Switch the interface language instantly.", "حساب تيك توك": "TikTok account", "اسم المستخدم": "Username", "حفظ على جهازي": "Save on my device", "حذف": "Delete", "فتح حسابي على تيك توك": "Open my TikTok profile", "لا نطلب كلمة المرور أبداً. اسم المستخدم يُحفظ داخل متصفحك على جهازك فقط، ولا يُرسل لأي سيرفر.": "We never ask for your password. The username is saved in your browser on your device only and is never sent to any server.", "الخصوصية": "Privacy", "الفيديو يُعالج داخل جهازك ولا يُرفع لأي مكان.": "The video is processed on your device and never uploaded anywhere.", "لا يوجد تسجيل دخول ولا قاعدة بيانات للمستخدمين.": "There is no login and no user database.", "تقدر تحذف ما انحفظ بضغطة \"حذف\".": "You can erase anything saved with the \"Delete\" button.", "تسجيل الدخول الحقيقي بتيك توك": "Real TikTok login", "الربط الفعلي بالحساب والنشر المباشر يتمان فقط عبر TikTok Login Kit، ويحتاجان تطبيقاً مطوّراً معتمداً من تيك توك وسيرفراً لإتمام تسجيل الدخول. هذا غير متاح داخل هذه الصفحة.": "Real account linking and direct posting work only through TikTok Login Kit and need a TikTok-approved developer app and a server. This is not available inside this page.", "· المعالجة تتم داخل جهازك": "· Processing happens on your device", "حالة النظام": "System status", "المعالجة: على جهازك (بدون سحابة)": "Processing: on your device (no cloud)", "معاينة على لقطة من فيديوك": "Preview on a frame of your video", "قارن قبل وبعد": "Compare before / after", "قبل": "Before", "بعد": "After", "فتح صفحة الرفع للمنصة (يُحفظ الفيديو أولاً)": "Open the platform upload page (the video is saved first)", "حفظ": "Save", "وقت المعالجة": "Processing time", "الدقة": "Resolution", "الفريمات والترميز": "FPS & codec", "الحجم": "Size", "الفريمات (ناتج / متوقع)": "Frames (output / expected)", "المدة (ناتج / أصل)": "Duration (output / source)", "معدل الإطارات": "Frame rate", "المدة": "Duration", "الصيغة": "Format", "تغيير": "Change", "جاري تجهيز المعاينة…": "Preparing preview…", "معاينة تقريبية للقطة من منتصف الفيديو. اسحب لرؤية الفرق.": "Approximate preview of a mid-video frame. Drag to see the difference.", "تعذرت المعاينة.": "Preview failed.", "اختر فيديو أولاً.": "Choose a video first.", "تم حفظ الفيديو. ارفعه من صفحة المنصة التي فتحت.": "Video saved. Upload it from the platform page that opened.", "متصفحك ما يدعم المعالجة الكاملة. افتح الرابط بـ Chrome حديث على أندرويد.": "Your browser does not support full processing. Open the link in a recent Chrome on Android.", "جاري قراءة الملف…": "Reading file…", "ما كدرت أقرأ الملف. اختره مرة ثانية من المعرض.": "Could not read the file. Pick it again from your gallery.", "جاري قراءة معلومات الفيديو…": "Reading video info…", "الفيديو أطول من دقيقتين. قصّه لدقيقتين أو أقل.": "The video is longer than two minutes. Trim it to two minutes or less.", "جاهز. اضغط ابدأ المعالجة.": "Ready. Tap Start processing.", "متصفحك ما يدعم المعالجة الكاملة، راح تشتغل بالوضع المباشر.": "Your browser lacks full processing; live mode will be used.", "هذي الصيغة تشتغل بالوضع المباشر (تسجيل أثناء التشغيل) وقد تفقد فريمات. الأفضل MP4 أو MOV.": "This format uses live mode (recording during playback) and may drop frames. MP4 or MOV is best.", "الهاتف ما يدعم الترميز السريع، جاري الوضع المباشر…": "This phone does not support fast encoding; switching to live mode…", "تمّت المعالجة بنجاح! فيديوك جاهز للنشر.": "Processing complete! Your video is ready to post.", "✓ تمّت المعالجة بنجاح! فيديوك جاهز للنشر.": "✓ Processing complete! Your video is ready to post.", "الحفظ المباشر غير متاح هنا. افتح الصفحة بالمتصفح.": "Direct saving is not available here. Open the page in your browser.", "تم الحفظ. تلقاه بمجلد التنزيلات.": "Saved. Find it in your Downloads folder.", "تعذّر الحفظ.": "Saving failed.", "المشاركة المباشرة غير متاحة هنا، فتم حفظ الفيديو. افتح تيك توك وارفعه من المعرض.": "Direct sharing is unavailable here, so the video was saved. Open TikTok and upload it from your gallery.", "المشاركة المباشرة غير متاحة بهذا المتصفح. افتح الصفحة بـ Chrome ثم جرّب.": "Direct sharing is unavailable in this browser. Open the page in Chrome and try again.", "عدّل الإعدادات وابدأ من جديد.": "Adjust the settings and start again.", "محفوظ على هذا الجهاز: @": "Saved on this device: @", "لا يوجد حساب محفوظ.": "No saved account.", "اكتب اسم المستخدم أولاً.": "Enter a username first.", "الملف غير مدعوم. استخدم MP4 أو MOV": "File not supported. Use MP4 or MOV", "الحد الأقصى دقيقتان": "Maximum is two minutes", "الحد الأقصى دقيقتين": "Maximum is two minutes", "الهاتف ما يدعم WebGL": "This phone does not support WebGL", "تم الإيقاف": "Stopped", "المتصفح ما يدعم التسجيل": "This browser does not support recording", "المتصفح ما يكدر يقرأ هذي الصيغة. حوّل الفيديو إلى MP4": "This browser cannot read this format. Convert the video to MP4", "جودة عالية": "High quality", "جودة جيدة": "Good quality", "متوسطة": "Medium", "الترميز السريع": "Fast encoder"},FR=[["جاري المعالجة… ", "Processing… "], [" فريم/ث — اذكر الله وصلّ على النبي", " fps — remember God"], ["توقفت المعالجة: ", "Processing stopped: "], [". جرّب 2K أو 1080p أو فيديو MP4.", ". Try 2K, 1080p or an MP4 video."], ["انقرأ ", "Read "], [" فريم فقط من ", " frames only out of "], ["✓ فحص السلامة: المدة والفريمات مطابقة. ", "✓ Integrity check: duration and frames match. "], ["⚠ الفريمات أقل من المتوقع. ", "⚠ Fewer frames than expected. "], ["الهاتف ما يدعم H.26
